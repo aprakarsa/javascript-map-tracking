@@ -7,8 +7,10 @@
     <title>Tracking Location</title>
 </head>
 <body>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
+    <button id="start">Start tracking</button>
+    <button id="stop">Stop tracking</button>
+    <br><br>
+    <div id="status"></div>
     <br><br>
     <div id="results"></div>
 
@@ -17,9 +19,11 @@
         const stop = document.querySelector("#stop");
 
         const coordinates = [];
+        var watchID;
 
         start.addEventListener("click", () => {
-            navigator.geolocation.watchPosition(
+            document.getElementById("status").innerHTML = "Start...";
+            watchID = navigator.geolocation.watchPosition(
                 data => {
                     console.log(data);
                     // coordinates.push([data.coords.latitude, data.coords.longitude]);
@@ -34,6 +38,12 @@
                 }
             );
         });
+
+        stop.addEventListener("click", () => {
+            document.getElementById("status").innerHTML = "Stop!";
+            navigator.geolocation.clearWatch(watchID);
+        })
+
     </script>
 </body>
 </html>
