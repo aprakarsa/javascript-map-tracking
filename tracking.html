@@ -13,37 +13,9 @@
     <div id="status"></div>
     <br><br>
     <div id="results"></div>
+    <br><br>
+    <div id="map"></div>
 
-    <script>
-        const start = document.querySelector("#start");
-        const stop = document.querySelector("#stop");
-
-        const coordinates = [];
-        var watchID;
-
-        start.addEventListener("click", () => {
-            document.getElementById("status").innerHTML = "Start...";
-            watchID = navigator.geolocation.watchPosition(
-                data => {
-                    console.log(data);
-                    // coordinates.push([data.coords.latitude, data.coords.longitude]);
-                    coordinates.push([data.coords.longitude, data.coords.latitude]);
-                    window.localStorage.setItem("coordinates", JSON.stringify(coordinates)); 
-
-                    document.getElementById("results").innerHTML = localStorage.getItem("coordinates");
-                }, 
-                (error) => console.log(Error), 
-                {
-                    enableHighAccuracy: true
-                }
-            );
-        });
-
-        stop.addEventListener("click", () => {
-            document.getElementById("status").innerHTML = "Stop!";
-            navigator.geolocation.clearWatch(watchID);
-        })
-
-    </script>
+<script src="app-tracking.js"></script>
 </body>
 </html>
